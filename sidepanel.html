@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>DocuSnap</title>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Inter:wght@400;500&family=Fira+Code:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="sidepanel.css">
+</head>
+<body>
+
+<div class="topbar">
+  <div class="brand"><div class="bmark">📸</div>DocuSnap</div>
+  <div class="topbar-right">
+    <button class="btn btn-xs btn-o hidden" id="btn-export">⬇ Export</button>
+    <button class="btn btn-xs btn-red hidden" id="btn-reset">✕ Reset</button>
+  </div>
+</div>
+
+<!-- IDLE -->
+<div class="screen" id="screen-idle">
+  <div class="hero">
+    <h2>📸 DocuSnap</h2>
+    <p>Auto-captures every click. AI writes descriptions in real time. No tab switching needed.</p>
+  </div>
+
+  <span class="sec-label">Documentation Type</span>
+  <div class="dtype-grid" id="dtype-grid"></div>
+
+  <span class="sec-label" style="margin-top:6px">Capture Mode</span>
+  <div class="mode-toggle">
+    <button class="mode-btn mode-auto-on" id="idle-btn-auto">⚡ Auto</button>
+    <button class="mode-btn" id="idle-btn-manual">🖱 Manual</button>
+  </div>
+
+  <span class="sec-label" style="margin-top:6px">Active Tab</span>
+  <div class="tab-info-row">
+    <div class="tab-dot"></div>
+    <span class="tab-url" id="tab-url">Fetching…</span>
+    <button class="tab-refresh-btn" id="btn-tab-refresh" title="Refresh tab info">↺</button>
+  </div>
+
+  <button class="btn btn-p start-btn" id="btn-start">⬤ Start Recording</button>
+</div>
+
+<!-- RECORDING -->
+<div class="screen hidden" id="screen-rec">
+  <div class="rec-status-bar">
+    <div class="rec-pill"><div class="rec-dot"></div><span>REC</span></div>
+    <span class="rec-timer" id="rtimer">00:00</span>
+    <span class="mode-badge mode-badge-auto" id="mode-badge">AUTO</span>
+    <span class="rec-ct" id="rec-ct">0 steps</span>
+  </div>
+  <div class="rec-toolbar">
+    <div class="rec-mode-seg">
+      <button class="rm-btn rm-auto" id="rec-btn-auto">⚡ Auto</button>
+      <button class="rm-btn" id="rec-btn-manual">🖱 Manual</button>
+    </div>
+    <button class="cap-btn" id="btn-cap">📸 Capture</button>
+    <button class="btn btn-sm btn-red" id="btn-stop">⏹ Stop</button>
+  </div>
+  <div class="steps-area" id="steps-area">
+    <div class="empty-state" id="empty-state">
+      <div class="ei">🖼️</div>
+      <p>Steps appear here automatically.<br>Interact with the page.</p>
+    </div>
+  </div>
+</div>
+
+<!-- EDITOR -->
+<div class="screen hidden" id="screen-editor">
+  <div class="editor-topbar">
+    <button class="btn btn-sm btn-o" id="btn-back-rec">← Back</button>
+    <input class="doc-title-in" id="doc-title" type="text" placeholder="Document title…">
+    <button class="btn btn-xs btn-purple" id="btn-open-exp">⬇</button>
+  </div>
+  <div class="editor-body">
+    <div class="e-rail" id="e-rail"></div>
+    <div class="e-form-wrap" id="e-form-wrap">
+      <div class="no-sel"><div class="no-sel-icon">✦</div><p>Select a step</p></div>
+    </div>
+  </div>
+</div>
+
+<!-- ANNOTATION OVERLAY -->
+<div class="overlay hidden" id="ann-overlay">
+  <div class="ann-bar" id="ann-bar">
+    <button class="ann-tool ann-tool-on" data-tool="highlight" id="ann-t-highlight">🖊 Highlight</button>
+    <button class="ann-tool" data-tool="arrow"     id="ann-t-arrow">➡ Arrow</button>
+    <button class="ann-tool" data-tool="text"      id="ann-t-text">T Label</button>
+    <button class="ann-tool" data-tool="blur"      id="ann-t-blur">⬛ Redact</button>
+    <div class="ann-sep"></div>
+    <button class="ann-tool" id="ann-btn-undo">↩ Undo</button>
+    <button class="ann-tool" id="ann-btn-clear">🗑 Clear</button>
+    <div class="ann-sep"></div>
+    <div class="ann-cols" id="ann-cols"></div>
+  </div>
+  <div class="ann-canvas-area">
+    <canvas id="ann-canvas"></canvas>
+  </div>
+  <div class="ann-footer">
+    <span class="ann-hint" id="ann-hint">Drag to highlight a region</span>
+    <div class="ann-footer-btns">
+      <button class="btn btn-sm btn-o" id="ann-btn-cancel">Cancel</button>
+      <button class="btn btn-sm btn-p" id="ann-btn-save">✓ Save</button>
+    </div>
+  </div>
+</div>
+
+<!-- EXPORT OVERLAY -->
+<div class="overlay hidden" id="exp-overlay">
+  <div class="exp-topbar">
+    <button class="back-btn" id="btn-exp-back">← Back</button>
+    <span class="exp-title">Export Guide</span>
+  </div>
+  <div class="exp-body">
+    <div class="exp-section">
+      <span class="exp-label">Format</span>
+      <div class="exp-opts">
+        <div class="exp-opt exp-opt-sel" data-fmt="html" id="fmt-html">🌐 HTML</div>
+        <div class="exp-opt" data-fmt="md" id="fmt-md">📝 Markdown</div>
+      </div>
+    </div>
+    <div class="exp-section" id="theme-section">
+      <span class="exp-label">Theme</span>
+      <div class="exp-opts">
+        <div class="exp-opt exp-opt-sel" data-theme="light" id="theme-light">☀️ Light</div>
+        <div class="exp-opt" data-theme="dark"  id="theme-dark">🌙 Dark</div>
+      </div>
+    </div>
+    <div class="exp-section">
+      <span class="exp-label">Include</span>
+      <div class="exp-toggles">
+        <div class="exp-toggle-row"><span>Table of Contents</span><button class="tog tog-on" id="tog-toc"></button></div>
+        <div class="exp-toggle-row"><span>Screenshots</span><button class="tog tog-on" id="tog-shots"></button></div>
+        <div class="exp-toggle-row"><span>Code Blocks</span><button class="tog tog-on" id="tog-code"></button></div>
+        <div class="exp-toggle-row"><span>Type Badges</span><button class="tog tog-on" id="tog-types"></button></div>
+      </div>
+    </div>
+    <button class="btn btn-p exp-go-btn" id="btn-do-export">⬇ Export Now</button>
+  </div>
+</div>
+
+<div id="toast"></div>
+
+<script src="sidepanel.js"></script>
+</body>
+</html>
