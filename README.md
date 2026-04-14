@@ -25,5 +25,4 @@
 ## Notes
 
 - Works on any HTTP/HTTPS page
-- Does NOT work on chrome:// pages or the Chrome Web Store (browser restriction)
-- Requires internet access for AI descriptions (calls Anthropic API)
+
