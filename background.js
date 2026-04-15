@@ -26,9 +26,7 @@ async function onMsg(msg) {
     autoMode = msg.auto !== false;
     const tab = await getTab();
     if (!tab) { send({ type: 'err', msg: 'No active tab' }); return; }
-    try {
-      await chrome.scripting.executeScript({ target: { tabId: tab.id }, files: ['content.js'] });
-    } catch (_) {}
+    try { await chrome.scripting.executeScript({ target: { tabId: tab.id }, files: ['content.js'] }); } catch (_) {}
     try { chrome.tabs.sendMessage(tab.id, { type: 'start', auto: autoMode }); } catch (_) {}
     send({ type: 'started', url: tab.url, title: tab.title });
     return;
@@ -71,9 +69,7 @@ async function doCapture(x, y, el) {
     const dataUrl = await chrome.tabs.captureVisibleTab(win.id, { format: 'jpeg', quality: 92 });
     const [tab] = await chrome.tabs.query({ active: true, windowId: win.id });
     send({ type: 'captured', dataUrl, x, y, el, url: tab?.url || '', title: tab?.title || '' });
-  } catch (e) {
-    send({ type: 'err', msg: e.message });
-  }
+  } catch (e) { send({ type: 'err', msg: e.message }); }
 }
 
 async function getTab() {
@@ -86,6 +82,4 @@ async function getTab() {
   } catch { return null; }
 }
 
-function send(msg) {
-  if (panelPort) try { panelPort.postMessage(msg); } catch (_) {}
-}
+function send(msg) { if (panelPort) try { panelPort.postMessage(msg); } catch (_) {} }

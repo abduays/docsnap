@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>DocuSnap — Annotate</title>
+<style>
+*{box-sizing:border-box;margin:0;padding:0;-webkit-font-smoothing:antialiased}
+html,body{height:100%;overflow:hidden;background:#0f172a;font-family:'Segoe UI',system-ui,sans-serif;color:#f1f5f9}
+
+.topbar{height:48px;background:#0f172a;border-bottom:1px solid #1e293b;display:flex;align-items:center;gap:6px;padding:0 10px;flex-shrink:0;flex-wrap:wrap}
+.tool-btn{display:flex;align-items:center;gap:4px;padding:5px 10px;background:#1e293b;border:1px solid #334155;border-radius:6px;cursor:pointer;font-size:11px;font-weight:600;color:#94a3b8;transition:all .12s;white-space:nowrap;font-family:inherit}
+.tool-btn:hover{background:#334155;color:#f1f5f9}
+.tool-btn.on{background:#6366f1;border-color:#6366f1;color:#fff}
+.tool-btn.green.on{background:#10b981;border-color:#10b981}
+.sep{width:1px;background:#334155;height:20px;flex-shrink:0;margin:0 2px}
+.colors{display:flex;gap:4px;align-items:center}
+.col{width:18px;height:18px;border-radius:50%;cursor:pointer;border:2px solid transparent;transition:all .12s;flex-shrink:0}
+.col.sel{border-color:#fff;transform:scale(1.25)}
+.size-sel{background:#1e293b;border:1px solid #334155;border-radius:5px;color:#94a3b8;font-size:10px;padding:3px 5px;outline:none;cursor:pointer;font-family:'Fira Code',monospace}
+.action-btn{padding:5px 10px;border-radius:6px;font-size:11px;font-weight:700;cursor:pointer;border:1px solid #334155;background:#1e293b;color:#94a3b8;transition:all .12s;font-family:inherit}
+.action-btn:hover{background:#334155;color:#f1f5f9}
+
+.canvas-area{flex:1;overflow:auto;display:flex;align-items:center;justify-content:center;background:#1e293b;padding:10px;height:calc(100vh - 48px - 44px)}
+#main-canvas{display:block;border-radius:4px;cursor:crosshair;image-rendering:pixelated}
+
+.footer{height:44px;background:#0f172a;border-top:1px solid #1e293b;display:flex;align-items:center;justify-content:space-between;padding:0 12px;flex-shrink:0}
+.hint{font-size:11px;color:#475569}
+.footer-btns{display:flex;gap:8px}
+.btn-cancel{padding:7px 16px;background:#1e293b;border:1px solid #334155;border-radius:7px;color:#94a3b8;font-size:12px;font-weight:700;cursor:pointer;font-family:inherit;transition:all .12s}
+.btn-cancel:hover{background:#334155;color:#f1f5f9}
+.btn-save{padding:7px 20px;background:linear-gradient(135deg,#6366f1,#8b5cf6);border:none;border-radius:7px;color:#fff;font-size:12px;font-weight:700;cursor:pointer;font-family:inherit;box-shadow:0 2px 8px rgba(99,102,241,.4);transition:all .12s}
+.btn-save:hover{transform:scale(1.03)}
+
+/* crop selection overlay */
+.crop-sel{position:absolute;border:2px dashed #f97316;background:rgba(249,115,22,.08);pointer-events:none;display:none}
+</style>
+</head>
+<body style="display:flex;flex-direction:column">
+
+<div class="topbar" id="topbar">
+  <button class="tool-btn on" data-t="highlight" id="t-hl">🖊 Highlight</button>
+  <button class="tool-btn" data-t="arrow"     id="t-ar">➡ Arrow</button>
+  <button class="tool-btn" data-t="text"      id="t-tx">T Label</button>
+  <button class="tool-btn" data-t="blur"      id="t-bl">⬛ Redact</button>
+  <button class="tool-btn" data-t="crop"      id="t-cr">✂ Crop</button>
+  <div class="sep"></div>
+  <div class="colors" id="cols"></div>
+  <div class="sep"></div>
+  <select class="size-sel" id="sz-sel" title="Brush size">
+    <option value="2">Thin</option>
+    <option value="4" selected>Medium</option>
+    <option value="7">Thick</option>
+  </select>
+  <div class="sep"></div>
+  <button class="action-btn" id="btn-undo">↩ Undo</button>
+  <button class="action-btn" id="btn-clear">🗑 Clear</button>
+  <button class="action-btn green on" id="btn-apply-crop" style="display:none;background:#10b981;border-color:#10b981;color:#fff">✂ Apply Crop</button>
+</div>
+
+<div class="canvas-area" id="canvas-area" style="position:relative">
+  <canvas id="main-canvas"></canvas>
+  <div class="crop-sel" id="crop-sel"></div>
+</div>
+
+<div class="footer">
+  <span class="hint" id="hint">Drag to highlight a region</span>
+  <div class="footer-btns">
+    <button class="btn-cancel" id="btn-cancel">Cancel</button>
+    <button class="btn-save"   id="btn-save">✓ Save Annotation</button>
+  </div>
+</div>
+
+<script src="annotate.js"></script>
+</body>
+</html>
