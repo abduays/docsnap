@@ -1,90 +1,127 @@
-# DocSnap  
-### Chrome Extension for Technical Documentation Workflows
+<div align="center">
 
-Capture. Structure. Export.  
-Built for engineers and documentation writers who need accurate, repeatable steps without manual overhead.
+# 📸 DocSnap  
+### Chrome Extension for Technical Documentation
 
----
+Capture → Structure → Export  
+Built for engineers and technical writers
 
-## Installation (Chrome Developer Mode)
+<br/>
 
-Set up the extension locally in under a minute:
+![Chrome](https://img.shields.io/badge/Platform-Chrome-blue)
+![Type](https://img.shields.io/badge/Type-Extension-orange)
+![Use Case](https://img.shields.io/badge/Focus-Documentation-green)
 
-1. Extract the project folder to your system  
-2. Open Chrome and navigate to `chrome://extensions`  
-3. Enable **Developer Mode** (top right toggle)  
-4. Select **Load unpacked**  
-5. Choose the `docusnap-extension` directory  
-6. Confirm the DocSnap icon appears in the toolbar  
+</div>
 
 ---
 
-## Usage Workflow
+## ⚙️ Installation
 
-### Launch
+<table>
+<tr>
+<td width="50%">
+
+### Setup Steps
+
+1. Unzip the project folder  
+2. Open `chrome://extensions`  
+3. Enable **Developer Mode**  
+4. Click **Load Unpacked**  
+5. Select `docusnap-extension`  
+
+</td>
+<td width="50%">
+
+### Expected Result
+
+- Extension loads without errors  
+- DocSnap icon visible in toolbar  
+- Ready to start recording  
+
+</td>
+</tr>
+</table>
+
+---
+
+## 🚀 How It Works
+
+### 1. Launch
 
 - Click the DocSnap icon  
-- The side panel loads with configuration options  
+- Side panel opens  
 
 ---
 
-### Configure Capture
+### 2. Configure
 
-- Select documentation type  
-- Choose capture mode:
-  - **Auto** → captures interactions automatically  
-  - **Manual** → controlled step capture  
-
----
-
-### Record
-
-1. Click **Start Recording**  
-2. Grant permission when Chrome prompts  
-3. Continue working in the browser  
-
-**System Behaviour:**
-- Interactions with buttons and links are captured  
-- A recording badge appears at the bottom right  
-- Steps populate in real time inside the panel  
-- AI generates contextual descriptions per step  
+| Mode    | Behaviour |
+|--------|----------|
+| Auto   | Captures interactions automatically |
+| Manual | User controls each step |
 
 ---
 
-### Review and Edit
+### 3. Record
 
-- Stop recording when complete  
-- Refine descriptions  
+- Click **Start Recording**  
+- Allow permissions  
+- Continue normal browser actions  
+
+**System Output:**
+- Clicks and actions captured  
+- Live steps appear in panel  
+- AI generates descriptions  
+- Recording badge visible on screen  
+
+---
+
+### 4. Refine
+
+- Stop recording  
+- Edit descriptions  
 - Annotate screenshots  
-- Insert code blocks where required  
+- Add code blocks  
 
 ---
 
-### Export
+### 5. Export
 
-- Export documentation as:
-  - HTML  
-  - Markdown  
-
----
-
-## Operational Constraints
-
-- Supports all standard HTTP and HTTPS pages  
-- Restricted on:
-  - `chrome://` URLs  
-  - Chrome Web Store pages  
+| Format    | Use Case |
+|----------|---------|
+| HTML     | Shareable guides |
+| Markdown | Developer documentation |
 
 ---
 
-## Dependencies
+## ⚠️ Constraints
 
-- Internet connection required for AI-generated descriptions  
-- Uses external API integration (Anthropic) for step interpretation  
+| Supported | Not Supported |
+|----------|--------------|
+| HTTP / HTTPS pages | `chrome://` pages |
+| Standard websites  | Chrome Web Store |
 
 ---
 
-## Positioning
+## 🔌 Dependencies
 
-DocSnap reduces documentation friction by converting real user actions into structured, editable output.  
-No reconstruction. No missed steps. No manual rewriting.
+- Internet required for AI descriptions  
+- Uses external API (Anthropic)  
+
+---
+
+## 🧠 Why DocSnap
+
+| Problem | Resolution |
+|--------|-----------|
+| Manual documentation is slow | Capture actions directly |
+| Steps get missed | Automatic tracking |
+| Rewriting is repetitive | AI-assisted descriptions |
+
+---
+
+## 📌 Summary
+
+DocSnap converts real browser activity into structured documentation.  
+No reconstruction. No skipped steps. Controlled output.
