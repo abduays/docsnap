@@ -1,29 +1,90 @@
-# DocuSnap Chrome Extension
+# DocSnap  
+### Chrome Extension for Technical Documentation Workflows
 
-## Install in Chrome (Developer Mode)
+Capture. Structure. Export.  
+Built for engineers and documentation writers who need accurate, repeatable steps without manual overhead.
 
-1. Unzip this folder somewhere on your computer
-2. Open Chrome and go to: `chrome://extensions`
-3. Enable **Developer mode** (toggle in top-right corner)
-4. Click **Load unpacked**
-5. Select the `docusnap-extension` folder
-6. The DocuSnap icon appears in your Chrome toolbar
+---
 
-## How to Use
+## Installation (Chrome Developer Mode)
 
-1. Click the DocuSnap icon in your toolbar
-2. The side panel opens — choose your documentation type
-3. Select **Auto** or **Manual** capture mode
-4. Click **Start Recording**
-5. Chrome asks permission to inject the recorder — allow it
-6. Work normally in the browser tab — every click on a button or link is auto-captured (Auto mode)
-7. A small "DocuSnap Recording" badge appears at the bottom-right of the page
-8. Steps appear in the side panel in real time with AI descriptions
-9. Click **Stop** when done → edit descriptions, annotate screenshots, add code blocks
-10. Click **Export** to download an HTML or Markdown guide
+Set up the extension locally in under a minute:
 
-## Notes
+1. Extract the project folder to your system  
+2. Open Chrome and navigate to `chrome://extensions`  
+3. Enable **Developer Mode** (top right toggle)  
+4. Select **Load unpacked**  
+5. Choose the `docusnap-extension` directory  
+6. Confirm the DocSnap icon appears in the toolbar  
 
-- Works on any HTTP/HTTPS page
-- Does NOT work on chrome:// pages or the Chrome Web Store (browser restriction)
-- Requires internet access for AI descriptions (calls Anthropic API)
+---
+
+## Usage Workflow
+
+### Launch
+
+- Click the DocSnap icon  
+- The side panel loads with configuration options  
+
+---
+
+### Configure Capture
+
+- Select documentation type  
+- Choose capture mode:
+  - **Auto** → captures interactions automatically  
+  - **Manual** → controlled step capture  
+
+---
+
+### Record
+
+1. Click **Start Recording**  
+2. Grant permission when Chrome prompts  
+3. Continue working in the browser  
+
+**System Behaviour:**
+- Interactions with buttons and links are captured  
+- A recording badge appears at the bottom right  
+- Steps populate in real time inside the panel  
+- AI generates contextual descriptions per step  
+
+---
+
+### Review and Edit
+
+- Stop recording when complete  
+- Refine descriptions  
+- Annotate screenshots  
+- Insert code blocks where required  
+
+---
+
+### Export
+
+- Export documentation as:
+  - HTML  
+  - Markdown  
+
+---
+
+## Operational Constraints
+
+- Supports all standard HTTP and HTTPS pages  
+- Restricted on:
+  - `chrome://` URLs  
+  - Chrome Web Store pages  
+
+---
+
+## Dependencies
+
+- Internet connection required for AI-generated descriptions  
+- Uses external API integration (Anthropic) for step interpretation  
+
+---
+
+## Positioning
+
+DocSnap reduces documentation friction by converting real user actions into structured, editable output.  
+No reconstruction. No missed steps. No manual rewriting.
